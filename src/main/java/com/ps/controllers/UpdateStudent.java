@@ -13,43 +13,43 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/addStd")
-public class AddStudent extends HttpServlet{
+@WebServlet("/updateStd")
+public class UpdateStudent extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String id = req.getParameter("id");
+		int id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
 		String course = req.getParameter("course");
-		String fees = req.getParameter("fees");
-		
+		int fees = Integer.parseInt(req.getParameter("fees"));
+				
 		try {
 			Connection conn = ConnectDB.getConnection();
 			
-			
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO std_data VALUES (?,?,?,?)");
-			ps.setString(1, id);
-			ps.setString(2, name);
-			ps.setString(3, course);
-			ps.setString(4, fees);
+
+			PreparedStatement ps = conn.prepareStatement("UPDATE std_data SET name = ?, course = ?, fees = ? WHERE id = ?");
+
+			ps.setString(1, name);
+			ps.setString(2, course);
+			ps.setInt(3, fees);
+			ps.setInt(4, id);
 			
 			int count = ps.executeUpdate();
+			
+			System.out.println(count);
+			
 			if(count > 0) {
-				System.out.println("std data added successfully");
-				
-				RequestDispatcher rd = req.getRequestDispatcher("/viewStudent.jsp");
-				rd.forward(req, resp);
+				RequestDispatcher rd = req.getRequestDispatcher("/profile.jsp");
+				rd.include(req, resp);
 			}
 			else {
-				RequestDispatcher rd = req.getRequestDispatcher("/addStudent.jsp");
-				rd.forward(req, resp);
+				System.out.println("data not changed");
+				RequestDispatcher rd = req.getRequestDispatcher("/editStudent.jsp");
+				rd.include(req, resp);
 			}
 			
 			
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 }

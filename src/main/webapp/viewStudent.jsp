@@ -47,8 +47,8 @@
 						<td><%= stdl.getName()%> </td>
 						<td><%= stdl.getCourse() %>  </td>
 						<td><%= stdl.getFees() %>  </td>
-						<td><a>Edit</a></td>
-						<td><a>Delete</a></td>
+						<td><a class="btn btn-warning" href="editStudent?id=<%= stdl.getId() %>">Edit</a></td>
+						<td><a class="btn btn-danger" href="deleteStudent?id=<%= stdl.getId() %>">Delete</a></td>
 					</tr>
 				</tbody>
 				<% } } %>

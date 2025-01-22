@@ -21,11 +21,11 @@
 				<h4>Login here...</h4>
 				<div class="mb-3 mt-4">
 					<label for="exampleFormControlInput1" class="form-label">Email
-						address</label> <input type="email" class="form-control" name="email" required>
+						address</label> <input type="email" class="form-control" name="email" >
 				</div>
 				<div class="mb-3">
 					<label for="exampleFormControlInput1" class="form-label">Password</label>
-					<input type="password" class="form-control" name="pass" required>
+					<input type="password" class="form-control" name="pass" >
 				</div>
 				<div class="d-flex justify-content-center">
 					<input type="submit" value="Login" class="btn btn-primary">
